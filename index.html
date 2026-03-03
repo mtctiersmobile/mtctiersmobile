@@ -221,6 +221,100 @@ document.getElementById('pTiers').innerHTML = grid || "<p style='color:#555;'>No
 document.getElementById('profileModal').style.display = 'flex';
 }
 load();
+  <!-- INFO Button in top-right -->
+<button id="pointsInfoBtn" onclick="openPointsInfo()">ⓘ</button>
+
+<!-- Points Modal -->
+<div id="pointsModal" class="modal-overlay" onclick="this.style.display='none'">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h2 style="font-family:'MultiCraftFont'; color:var(--purple); margin-bottom:20px;">
+      POINT SYSTEM
+    </h2>
+
+    <div style="font-family:'MultiCraftFont'; font-size:0.75rem; line-height:1.8;">
+      HT1 — 50 PTS<br>
+      LT1 — 40 PTS<br><br>
+      HT2 — 30 PTS<br>
+      LT2 — 20 PTS<br><br>
+      HT3 — 12 PTS<br>
+      LT3 — 8 PTS<br><br>
+      HT4 — 5 PTS<br>
+      LT4 — 3 PTS<br><br>
+      HT5 — 2 PTS<br>
+      LT5 — 1 PT
+    </div>
+  </div>
+</div>
+
+<style>
+/* INFO Button */
+#pointsInfoBtn {
+  position: fixed;
+  top: 20px;
+  right: 25px;
+  z-index: 5000;
+
+  background: #000;
+  border: 1px solid var(--purple);
+  color: var(--purple);
+
+  font-family: 'MultiCraftFont';
+  font-size: 1rem;
+
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 10px var(--purple-glow);
+}
+
+#pointsInfoBtn:hover {
+  background: var(--purple);
+  color: #000;
+  box-shadow: 0 0 20px var(--purple-glow);
+  transform: scale(1.1);
+}
+
+/* Modal overlay & content */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(15px);
+}
+
+.modal-content {
+  background: #010102;
+  border: 2px solid var(--purple);
+  border-radius: 12px;
+  padding: 30px;
+  width: 420px;
+  text-align: center;
+  box-shadow: 0 0 50px var(--purple-glow);
+  animation: modalIn 0.3s ease-out;
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</style>
+
+<script>
+function openPointsInfo() {
+  document.getElementById('pointsModal').style.display = 'flex';
+}
+</script>
 </script>
 </body>
 </html>
