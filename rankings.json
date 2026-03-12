@@ -41,7 +41,8 @@
     { "name": "Husky_Multicraft", "region": "NA", "device": "MK" },
     { "name": "quickhertz", "region": "NA", "device": "MK" },
     { "name": "ChillPotato", "region": "AS", "device": "MK" },
-    { "name": "RayValidd", "region": "AS", "device": "MK" }
+    { "name": "RayValidd", "region": "AS", "device": "MK" },
+    { "name": "-_ItsEthanLIT_-", "region": "SA", "device": "CT" }
   ],
 
   "Emerald": {
@@ -68,7 +69,7 @@
     "LT2": ["big-nub", "NotMythxc4l", "M0rt7uxMC", "urLilEKitten_"],
     "HT3": ["V4n1shed", "Possessed_YT", "-_Hades_-", "f0rg1v3n", "Jerryisking", "Husky_Multicraft", "lowPing", "chi-na"],
     "LT3": ["revan", "RayValidd"],
-    "HT4": ["Kirby", "NetworkHero", "drago", "MatrixOP980", "SaintOfZytrox"],
+    "HT4": ["Kirby", "NetworkHero", "drago", "MatrixOP980", "SaintOfZytrox", "-_ItsEthanLIT_-"],
     "LT4": ["supermobilenoobpvp", "oncethebestpvp", "Mane", "chi-na"],
     "HT5": ["FarXD", "AntonioZga9"],
     "LT5": ["MGK", "ArpanYT"]
