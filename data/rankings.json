@@ -45,8 +45,6 @@
     { "name": "-_ItsEthanLIT_-", "region": "SA", "device": "CT" },
     { "name": "Jetbunz99", "region": "SA", "device": "MB" }
   ],
-  
-
   "Emerald": {
     "HT1": ["Game1K"],
     "LT1": ["sample", "StrawberryButter", "system1117"],
@@ -61,21 +59,19 @@
     "HT5": ["ArpanYT", "MatrixOP980"],
     "LT5": ["MGK", "Afdemonking"]
   },
-
   "Dragonhide KB": {
     "HT1": ["Game1K"],
     "LT1": ["system1117", "DivyamGamerYT", "quickhertz"],
     "HT2": ["sample", "skibidi1234", "ItzNoob_", "StrawberryButter", "big-nub"],
     "RHT2": ["TimmyLoal", "LifoMC"],
     "LT2": ["x9jm", "M0rt7uxMC", "urLilEKitten_", "Cosmix_"],
-    "HT3": ["V4n1shed", "Possessed_YT", "-_Hades_-", "f0rg1v3n", "Jerryisking", "Husky_Multicraft", "lowPing", "chi-na", "Jetbunz99"],
-    "LT3": ["revan", "RayValidd"],
+    "HT3": ["V4n1shed", "Possessed_YT", "-_Hades_-", "f0rg1v3n", "Jerryisking", "Husky_Multicraft", "lowPing", "chi-na"],
+    "LT3": ["revan", "RayValidd", "Jetbunz99"],
     "HT4": ["Kirby", "NetworkHero", "drago", "MatrixOP980", "SaintOfZytrox", "-_ItsEthanLIT_-"],
     "LT4": ["supermobilenoobpvp", "oncethebestpvp", "Mane", "chi-na"],
     "HT5": ["FarXD", "AntonioZga9"],
     "LT5": ["MGK", "ArpanYT"]
   },
-
   "Emerald OA": [],
   "Dragonhide KB OA": [],
   "Wand": [],
