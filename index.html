@@ -4,41 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTC TIERS</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mtctiers/mtctiers.github.io@main/css.css?v=999">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mtctiers/mtctiers.github.io@main/css.css?v=888">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/assets/backgroundsword.png">
-    
+
     <style>
-        /* FORCED HOVER ENGINE - OVERRIDING EXTERNAL CSS */
-        .tag-wrap, .p-kit-item { 
-            position: relative !important; 
-            display: inline-block !important; 
+        /* --- THE NUCLEAR ALIGNMENT FIX --- */
+        .tag-wrap, .p-kit-item {
+            position: relative !important;
+            display: inline-flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
 
+        /* Centering the icon inside the circle */
+        .p-kit-circle {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin: 0 auto 8px auto !important;
+            overflow: hidden !important;
+        }
+
+        .p-kit-circle img {
+            display: block !important;
+            width: 32px !important;
+            height: 32px !important;
+            margin: 0 !important;
+        }
+
+        /* Fixing the Popup position and style */
         .tag-popup, .kit-popup {
             position: absolute !important;
-            bottom: 150% !important;
+            bottom: 120% !important;
             left: 50% !important;
             transform: translateX(-50%) translateY(10px) !important;
             background: #08080c !important;
             color: #fff !important;
-            padding: 6px 12px !important;
-            font-size: 0.65rem !important;
-            border-radius: 4px !important;
-            border: 1px solid #a855f7 !important; /* var(--purple) */
+            padding: 10px 16px !important;
+            font-size: 0.75rem !important;
+            font-family: 'MultiCraftFont', monospace !important;
+            border-radius: 8px !important;
+            border: 2px solid #a855f7 !important; /* Purple */
             white-space: nowrap !important;
-            box-shadow: 0 0 15px rgba(0,0,0,1) !important;
-            
-            /* HIDDEN STATE */
+            box-shadow: 0 0 20px rgba(0,0,0,1) !important;
             opacity: 0 !important;
             visibility: hidden !important;
-            transition: 0.2s ease-out !important;
-            pointer-events: none !important;
+            transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28) !important;
             z-index: 9999 !important;
+            text-align: center !important;
         }
 
-        .kit-popup { border-color: #ffd700 !important; bottom: 120% !important; }
+        .kit-popup { border-color: #ffd700 !important; bottom: 130% !important; }
 
-        /* TRIGGER VISIBILITY */
+        /* Triggering the Hover */
         .tag-wrap:hover .tag-popup, 
         .p-kit-item:hover .kit-popup {
             opacity: 1 !important;
@@ -96,7 +115,7 @@ function getTags(name) {
     const regFull = REG_MAP[p.region] || p.region;
     const devFull = DEV_MAP[p.device] || p.device;
 
-    return `<div style="margin-top:10px; display:flex; gap:8px;">
+    return `<div style="margin-top:12px; display:flex; gap:8px; justify-content: center;">
         <div class="tag-wrap">
             <span class="tag reg-${p.region.toLowerCase()}">${p.region}</span>
             <div class="tag-popup">${regFull}</div>
@@ -146,7 +165,7 @@ function render(kit) {
             for(let t in DATA[kit]) if(t.includes(lvl)) DATA[kit][t].forEach(name => {
                 has = true; const isR = t.startsWith('R');
                 const displayLabel = isR ? 'Retired ' + t.substring(1) : t;
-                col += `<div class="tier-card clickable" style="width:200px; padding:12px;" onclick="openProfile('${name}')"><span style="font-size:0.9rem; font-weight:bold;">${name}</span>${getTags(name)}<div style="font-size:0.6rem; color:${isR?'var(--grey)':'var(--gold)'}; margin-top:5px; font-weight:bold;">${displayLabel}</div></div>`;
+                col += `<div class="tier-card clickable" style="width:200px; padding:12px; text-align:center;" onclick="openProfile('${name}')"><span style="font-size:0.9rem; font-weight:bold;">${name}</span>${getTags(name)}<div style="font-size:0.6rem; color:${isR?'var(--grey)':'var(--gold)'}; margin-top:5px; font-weight:bold;">${displayLabel}</div></div>`;
             });
             if(has) { col += `</div>`; grid.innerHTML += col; }
         });
@@ -206,8 +225,6 @@ async function switchTab(tab) {
         });
     }
 }
-
-function openInfo() { document.getElementById('infoModal').style.display = 'flex'; }
 load();
 </script>
 </body>
