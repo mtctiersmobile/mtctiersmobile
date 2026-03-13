@@ -64,6 +64,72 @@
 </div>
 
 <script>
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTC TIERS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mtctiers/mtctiers.github.io@main/css.css">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/assets/backgroundsword.png">
+    <meta property="og:title" content="MTC TIERS">
+    <meta property="og:description" content="Rankings and Tiertesting for MultiCraft.">
+    <meta property="og:url" content="https://mtctiers.github.io/">
+    <meta property="og:image" content="https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/assets/backgroundsword.png">
+    <meta property="og:type" content="website">
+</head>
+<body>
+<div class="sweep-bg"></div>
+<header><img src="https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/assets/backgroundsword.png" class="title-sword" alt="Logo"><h1 class="main-title">MTC TIERS</h1></header>
+
+<nav>
+    <div class="nav-center">
+        <div id="nav-rankings" class="nav-link active" onclick="switchTab('rankings')">RANKINGS</div>
+        <div id="nav-hof" class="nav-link" onclick="switchTab('hof')">HALL OF FAME</div>
+        <div id="nav-testers" class="nav-link" onclick="switchTab('testers')">TIER TESTERS</div>
+    </div>
+    <div class="search-wrap">
+        <input type="text" id="playerSearch" placeholder="SEARCH PLAYER..." oninput="handleSearch(this.value)">
+        <div id="searchPopup"></div>
+    </div>
+</nav>
+
+<div id="viewLabel" style="font-family:'MultiCraftFont'; font-size:1.2rem; color:var(--gold); margin:25px 0;">OVERALL</div>
+<div id="kitBar"></div>
+<div id="displayList"></div>
+
+<div class="info-btn" onclick="openInfo()">i</div>
+
+<div id="infoModal" class="modal-overlay" onclick="this.style.display='none'">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h2 style="font-family:'MultiCraftFont'; color:var(--purple); margin-top:0;">INFORMATION</h2>
+        <div style="text-align: left; font-size: 0.85rem; line-height: 1.6;">
+            <p><b style="color:var(--purple)">SERVER CODE:</b> UNRELEASED</p>
+            <p><b style="color:var(--purple)">DISCORD:</b> UNRELEASED</p>
+            <hr style="border:0; border-top:1px solid #333; margin:15px 0;">
+            <b style="color:var(--gold); font-family:'MultiCraftFont'; font-size:0.75rem;">POINTS SYSTEM:</b>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; font-size:0.7rem; margin-top:12px; gap:8px;">
+                <div>HT1 = 50 pts</div><div>LT1 = 40 pts</div>
+                <div>HT2 = 30 pts</div><div>LT2 = 20 pts</div>
+                <div>HT3 = 12 pts</div><div>LT3 = 8 pts</div>
+                <div>HT4 = 5 pts</div><div>LT4 = 3 pts</div>
+                <div>HT5 = 2 pts</div><div>LT5 = 1 pt</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="profileModal" class="modal-overlay" onclick="this.style.display='none'">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div id="pRank" style="font-family:'MultiCraftFont'; color:var(--purple); font-size:0.7rem;">RANK #--</div>
+        <h2 id="pName" style="font-family:'MultiCraftFont'; color:#fff; margin:10px 0; font-size: 1.8rem;">Player</h2>
+        <div id="pMeta" style="margin-bottom: 15px;"></div>
+        <div id="pPoints" style="color:var(--gold); font-family:'MultiCraftFont'; font-size:1.4rem; margin-bottom:20px;">0 PTS</div>
+        <div id="pTiers" style="display:flex; flex-wrap:wrap; justify-content:center; gap:18px; border-top:1px solid #222; padding-top:20px;"></div>
+    </div>
+</div>
+
+<script>
 const ASSETS = "https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/assets/";
 const DATA_PATH = "https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/data/";
 
@@ -212,5 +278,7 @@ function openInfo() { document.getElementById('infoModal').style.display = 'flex
 load();
 document.addEventListener('click', (e) => { if(!e.target.closest('.search-wrap')) document.getElementById('searchPopup').style.display = 'none'; });
 </script>
+</body>
+</html>
 </body>
 </html>
