@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTC TIERS</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mtctiers/mtctiers.github.io@main/css.css?v=215">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mtctiers/mtctiers.github.io@main/css.css?v=301">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/assets/backgroundsword.png">
 </head>
 <body>
 <div class="sweep-bg"></div>
-<header><img src="https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/assets/backgroundsword.png" class="title-sword"><h1 class="main-title">MTC TIERS</h1></header>
+<header>
+    <img src="https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/assets/backgroundsword.png" class="title-sword">
+    <h1 class="main-title">MTC TIERS</h1>
+</header>
 
 <nav>
     <div class="nav-center">
@@ -23,7 +26,7 @@
     </div>
 </nav>
 
-<div id="viewLabel" style="font-size:1.2rem; color:var(--gold); margin:25px 0;">OVERALL</div>
+<div id="viewLabel" style="font-size:1.2rem; color:var(--gold); margin:25px 0; text-align:center;">OVERALL</div>
 <div id="kitBar"></div>
 <div id="displayList"></div>
 
@@ -45,7 +48,7 @@ const REGIONS = { "NA": "North America", "EU": "Europe", "RS": "Russia", "OC": "
 const DEVICES = { "MK": "Mouse & Keyboard", "TP": "Touchpad", "MB": "Mobile", "CT": "Controller" };
 
 let DATA = { Kits: {}, HOF: [], Testers: [], Players: [], Overall: {} };
-let currentKit = "Overall"; // Fix: Stores which kit you were viewing
+let currentKit = "Overall";
 
 async function load() {
     try {
@@ -91,13 +94,12 @@ function getTags(name, centered = false) {
 }
 
 function render(kit) {
-    currentKit = kit; // Save the kit state
+    currentKit = kit;
     const out = document.getElementById('displayList'); out.innerHTML = "";
     document.getElementById('viewLabel').innerText = kit.toUpperCase();
     
-    // Update kit button active state
     document.querySelectorAll('.kit-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText.includes(kit.toUpperCase()));
+        btn.classList.toggle('active', btn.getAttribute('data-kit') === kit);
     });
 
     if(kit === "Overall") {
@@ -145,7 +147,7 @@ function switchTab(tab) {
     
     if(tab === 'rankings') {
         kitBar.style.display = "flex";
-        render(currentKit); // Return to the kit you were last looking at
+        render(currentKit);
     } else {
         kitBar.style.display = "none";
         document.getElementById('viewLabel').innerText = (tab === 'hof' ? "HALL OF FAME" : "TIER TESTERS");
@@ -155,7 +157,7 @@ function switchTab(tab) {
                 const hasProfile = DATA.Overall[p.name];
                 out.innerHTML += `<div class="tier-card ${hasProfile ? 'clickable' : ''}" ${hasProfile ? `onclick="openProfile('${p.name}')"` : ''}>
                     <div style="font-size:1.2rem; color:var(--gold);">${p.name}</div>
-                    <div style="color:#aaa; font-size:0.8rem; margin-top:5px;">${p.description}</div>
+                    <div class="hof-desc">${p.description}</div>
                 </div>`;
             });
         } else {
@@ -199,7 +201,8 @@ function buildKitBar() {
     Object.keys(KIT_MAP).forEach(k => {
         const btn = document.createElement('button');
         btn.className = `kit-btn ${k==='Overall'?'active':''}`;
-        btn.innerHTML = (KIT_MAP[k] ? `<img src="${ASSETS}${KIT_MAP[k]}" style="width:16px; margin-right:5px;"> ` : "") + k.toUpperCase();
+        btn.setAttribute('data-kit', k);
+        btn.innerHTML = (KIT_MAP[k] ? `<img src="${ASSETS}${KIT_MAP[k]}" style="width:16px; margin-right:5px; pointer-events:none;"> ` : "") + k.toUpperCase();
         btn.onclick = () => render(k);
         bar.appendChild(btn);
     });
@@ -209,7 +212,7 @@ function handleSearch(val) {
     const pop = document.getElementById('searchPopup');
     if(!val) { pop.style.display = 'none'; return; }
     const matches = Object.keys(DATA.Overall).filter(n => n.toLowerCase().includes(val.toLowerCase())).slice(0, 5);
-    pop.innerHTML = matches.map(m => `<div class="search-item" onclick="openProfile('${m}'); pop.style.display='none';"><b>${m}</b></div>`).join('');
+    pop.innerHTML = matches.map(m => `<div class="search-item" onclick="openProfile('${m}'); document.getElementById('searchPopup').style.display='none';"><b>${m}</b></div>`).join('');
     pop.style.display = matches.length ? 'block' : 'none';
 }
 
