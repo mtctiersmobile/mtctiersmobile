@@ -4,81 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTC TIERS</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mtctiers/mtctiers.github.io@main/css.css?v=120">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mtctiers/mtctiers.github.io@main/css.css?v=125">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/assets/backgroundsword.png">
 
     <style>
-        /* --- STABILIZE OVERALL LIST --- */
-        .player-info-row {
-            display: flex !important;
-            align-items: center !important;
-            gap: 15px !important;
+        /* --- LIST ALIGNMENT (NEW LINE FOR TAGS) --- */
+        .player-row-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
         }
-        .tag-container-fixed {
-            display: flex !important;
-            gap: 6px !important;
-            min-width: 100px !important; /* Prevents text shifting */
+        .tag-group {
+            display: flex;
+            gap: 6px;
+            justify-content: center; /* Centers tags in modal */
+            width: 100%;
         }
 
-        /* --- MODAL KIT ITEM LAYOUT --- */
+        /* --- MODAL BOX TIGHTENING --- */
+        .modal-content {
+            max-width: 400px !important; /* Prevents the box from being too big */
+            padding: 20px !important;
+        }
+
+        /* --- HOVER EFFECT (IMAGE MATCH) --- */
         .p-kit-item {
-            position: relative !important;
-            display: inline-flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            width: 80px !important;
-            margin-top: 15px !important; /* Brings images down from the top border */
+            position: relative;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            width: 70px;
+            margin-top: 20px;
         }
 
-        .p-kit-circle {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            width: 55px !important;
-            height: 55px !important;
-            border-radius: 50% !important;
-            border: 2px solid var(--gold) !important;
-            background: #000 !important;
-            margin-bottom: 8px !important;
-        }
-
-        .p-kit-circle img {
-            width: 30px !important;
-            height: 30px !important;
-        }
-
-        /* --- THE POPUP (MATCHES IMAGE 1) --- */
         .kit-popup {
-            position: absolute !important;
-            bottom: 115% !important;
-            left: 50% !important;
-            transform: translateX(-50%) translateY(10px) !important;
-            background: #000 !important;
-            color: #fff !important;
-            padding: 6px 12px !important;
-            font-size: 0.7rem !important;
-            font-family: 'MultiCraftFont', monospace !important;
-            border: 2px solid #ffd700 !important; /* Gold border like reference */
-            border-radius: 6px !important;
-            white-space: nowrap !important;
-            opacity: 0 !important;
-            visibility: hidden !important;
-            transition: 0.2s ease-out !important;
-            z-index: 100 !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8) !important;
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%) translateY(5px);
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid var(--gold);
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.2s;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); /* Glow */
+            z-index: 10;
+            white-space: nowrap;
         }
 
         .p-kit-item:hover .kit-popup {
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: translateX(-50%) translateY(0) !important;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
         }
 
-        .tier-text-bottom {
-            font-family: 'MultiCraftFont', monospace !important;
-            font-size: 0.6rem !important;
-            font-weight: bold !important;
+        /* 2-Line Hover Text */
+        .popup-kit-name { color: #aaaaaa; font-size: 0.6rem; display: block; margin-bottom: 2px; }
+        .popup-tier-name { color: var(--gold); font-size: 0.8rem; font-weight: bold; display: block; }
+
+        .p-kit-circle {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+            margin-bottom: 5px;
         }
+        .p-kit-circle img { width: 28px; }
+
+        .tier-label-under { font-size: 0.65rem; color: var(--gold); font-weight: bold; }
+
     </style>
 </head>
 <body>
@@ -105,25 +107,24 @@
     <div class="modal-content" onclick="event.stopPropagation()">
         <div id="pRank" style="font-family:'MultiCraftFont'; color:var(--purple); font-size:0.7rem;">RANK #--</div>
         <h2 id="pName" style="font-family:'MultiCraftFont'; color:#fff; margin:10px 0; font-size: 1.8rem;">Player</h2>
-        <div id="pMeta" style="display:flex; justify-content:center; gap:8px; margin-bottom: 15px;"></div>
+        <div id="pMeta" class="tag-group" style="margin-bottom: 15px;"></div>
         <div id="pPoints" style="color:var(--gold); font-family:'MultiCraftFont'; font-size:1.4rem; margin-bottom:20px;">0 PTS</div>
-        <div id="pTiers" style="display:flex; flex-wrap:wrap; justify-content:center; gap:15px; border-top:1px solid #333; padding-top:10px;"></div>
+        <div id="pTiers" style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; border-top:1px solid #333; padding-top:15px;"></div>
     </div>
 </div>
 
 <script>
 const ASSETS = "https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/assets/";
 const DATA_PATH = "https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/data/";
-
 const KIT_MAP = { "Overall": "", "Emerald": "emerald.png", "Emerald KB": "emerald_kb.png", "Emerald OA": "emerald_oa.png", "Dragonhide KB": "dragonhide_kb.png", "Dragonhide KB OA": "kb_oa.png", "Wand": "wand.png", "Diamond": "diamond.png" };
 
 let DATA = {};
 let CURRENT_TAB = 'rankings';
 let CURRENT_KIT = 'Overall';
 
-function getTags(name) {
+function getTags(name, centered = false) {
     const p = DATA.Players?.find(x => x.name === name) || {region:"NA", device:"MK"};
-    return `<div class="tag-container-fixed">
+    return `<div class="tag-group" style="${centered ? 'justify-content:center;' : 'justify-content:flex-start;'}">
         <span class="tag reg-${p.region.toLowerCase()}">${p.region}</span>
         <span class="tag dev-${p.device.toLowerCase()}">${p.device}</span>
     </div>`;
@@ -132,12 +133,25 @@ function getTags(name) {
 async function load() {
     const r = await fetch(`${DATA_PATH}rankings.json?v=${Date.now()}`);
     DATA = await r.json();
-    let totals = {};
-    const PTS = { "HT1":50, "LT1":40, "HT2":30, "LT2":20, "HT3":12, "LT3":8, "HT4":5, "LT4":3, "HT5":2, "LT5":1 };
-    for(let k in DATA) if(k!=="Overall" && k!=="Players") for(let t in DATA[k]) DATA[k][t].forEach(p => totals[p] = (totals[p]||0) + (PTS[t.replace('R','')]||0));
-    DATA["Overall"] = totals;
+    calculateOverall();
     buildKitBar();
     render("Overall");
+}
+
+function calculateOverall() {
+    let totals = {};
+    const PTS = { "HT1":50, "LT1":40, "HT2":30, "LT2":20, "HT3":12, "LT3":8, "HT4":5, "LT4":3, "HT5":2, "LT5":1 };
+    for(let k in DATA) {
+        if(k!=="Overall" && k!=="Players") {
+            for(let t in DATA[k]) {
+                DATA[k][t].forEach(p => {
+                    const cleanT = t.replace('R','');
+                    totals[p] = (totals[p]||0) + (PTS[cleanT]||0);
+                });
+            }
+        }
+    }
+    DATA["Overall"] = totals;
 }
 
 function buildKitBar() {
@@ -146,23 +160,30 @@ function buildKitBar() {
         const btn = document.createElement('button');
         btn.className = `kit-btn ${k==='Overall'?'active':''}`;
         btn.innerHTML = (KIT_MAP[k] ? `<img src="${ASSETS}${KIT_MAP[k]}" style="width:16px; margin-right:5px;"> ` : "") + k.toUpperCase();
-        btn.onclick = () => { if(CURRENT_TAB === 'rankings') { document.querySelectorAll('.kit-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); CURRENT_KIT = k; render(k); }};
+        btn.onclick = () => { 
+            if(CURRENT_TAB === 'rankings') {
+                document.querySelectorAll('.kit-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active'); 
+                CURRENT_KIT = k; 
+                render(k); 
+            }
+        };
         bar.appendChild(btn);
     });
 }
 
 function render(kit) {
-    if(CURRENT_TAB !== 'rankings') return;
-    document.getElementById('viewLabel').innerText = kit.toUpperCase();
     const out = document.getElementById('displayList'); out.innerHTML = "";
     if(kit === "Overall") {
         Object.entries(DATA.Overall).sort((a,b)=>b[1]-a[1]).forEach(([name, pts], i) => {
             out.innerHTML += `
             <div class="tier-card clickable" onclick="openProfile('${name}')">
                 <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-                    <div class="player-info-row">
-                        <b style="color:var(--purple); min-width:30px;">#${i+1}</b>
-                        <span style="font-weight:bold; min-width:120px;">${name}</span>
+                    <div class="player-row-content">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <b style="color:var(--purple); font-size:0.8rem;">#${i+1}</b>
+                            <span style="font-weight:bold;">${name}</span>
+                        </div>
                         ${getTags(name)}
                     </div>
                     <b style="color:var(--gold);">${pts} PTS</b>
@@ -170,31 +191,44 @@ function render(kit) {
             </div>`;
         });
     } else {
-        const grid = document.createElement('div'); grid.style.display="flex"; grid.style.gap="20px"; grid.style.flexWrap="wrap"; grid.style.justifyContent="center";
-        ["T1","T2","T3","T4","T5"].forEach(lvl => {
-            let col = `<div style="min-width:200px;"><div style="color:var(--purple); border-bottom:1px solid #333; margin-bottom:10px; text-align:center; font-family:'MultiCraftFont'; font-size:0.9rem;">${lvl}</div>`;
-            let has = false;
-            for(let t in DATA[kit]) if(t.includes(lvl)) DATA[kit][t].forEach(name => {
-                has = true; const isR = t.startsWith('R');
-                col += `<div class="tier-card clickable" style="width:200px; padding:12px; text-align:center;" onclick="openProfile('${name}')">
-                    <span style="font-weight:bold;">${name}</span>
-                    <div style="display:flex; justify-content:center; margin-top:5px;">${getTags(name)}</div>
-                    <div style="font-size:0.6rem; color:${isR?'#777':'var(--gold)'}; margin-top:5px; font-weight:bold;">${isR?'Retired '+t.substring(1):t}</div>
-                </div>`;
-            });
-            if(has) { col += `</div>`; grid.innerHTML += col; }
-        });
-        out.appendChild(grid);
+        // Kit Grid View logic remains similar but uses centralized tags
+        renderKitGrid(kit);
     }
+}
+
+function renderKitGrid(kit) {
+    const out = document.getElementById('displayList');
+    const grid = document.createElement('div'); 
+    grid.style.display="flex"; grid.style.gap="15px"; grid.style.flexWrap="wrap"; grid.style.justifyContent="center";
+    
+    ["T1","T2","T3","T4","T5"].forEach(lvl => {
+        let col = `<div style="min-width:180px;"><div class="tier-header">${lvl}</div>`;
+        let has = false;
+        for(let t in DATA[kit]) {
+            if(t.includes(lvl)) {
+                DATA[kit][t].forEach(name => {
+                    has = true;
+                    col += `<div class="tier-card clickable" style="margin-bottom:10px; text-align:center;" onclick="openProfile('${name}')">
+                        <div style="font-weight:bold; margin-bottom:5px;">${name}</div>
+                        ${getTags(name, true)}
+                        <div style="font-size:0.6rem; color:var(--gold); margin-top:5px;">${t}</div>
+                    </div>`;
+                });
+            }
+        }
+        if(has) { col += `</div>`; grid.appendChild(Object.assign(document.createElement('div'), {innerHTML: col})); }
+    });
+    out.appendChild(grid);
 }
 
 function openProfile(name) {
     if(!DATA.Overall?.[name]) return;
     const sorted = Object.entries(DATA.Overall).sort((a,b)=>b[1]-a[1]);
     const rankIdx = sorted.findIndex(x => x[0] === name);
+    
     document.getElementById('pRank').innerText = "RANK #" + (rankIdx + 1);
     document.getElementById('pName').innerText = name;
-    document.getElementById('pMeta').innerHTML = getTags(name);
+    document.getElementById('pMeta').innerHTML = getTags(name, true);
     document.getElementById('pPoints').innerText = DATA.Overall[name] + " PTS";
     
     let grid = "";
@@ -204,15 +238,14 @@ function openProfile(name) {
             if(DATA[k][t].includes(name)) {
                 const isR = t.startsWith('R');
                 const cleanTier = isR ? t.substring(1) : t;
-                const tierColor = isR ? '#777' : 'var(--gold)';
-                
                 grid += `
                 <div class="p-kit-item">
-                    <div class="kit-popup"><b>${k.toUpperCase()} ${cleanTier}</b></div>
-                    <div class="p-kit-circle" style="border-color:${tierColor}">
-                        <img src="${ASSETS}${KIT_MAP[k]}">
+                    <div class="kit-popup">
+                        <span class="popup-kit-name">${k.toUpperCase()}</span>
+                        <span class="popup-tier-name">${cleanTier}</span>
                     </div>
-                    <div class="tier-text-bottom" style="color:${tierColor}">${cleanTier}</div>
+                    <div class="p-kit-circle"><img src="${ASSETS}${KIT_MAP[k]}"></div>
+                    <div class="tier-label-under">${cleanTier}</div>
                 </div>`;
             }
         }
@@ -221,25 +254,30 @@ function openProfile(name) {
     document.getElementById('profileModal').style.display = 'flex';
 }
 
-function handleSearch(val) {
-    const pop = document.getElementById('searchPopup');
-    if(!val) { pop.style.display = 'none'; return; }
-    const matches = Object.keys(DATA.Overall || {}).filter(n => n.toLowerCase().includes(val.toLowerCase())).slice(0, 5);
-    pop.innerHTML = matches.map(m => `<div class="search-item" onclick="openProfile('${m}'); pop.style.display='none';"><b>${m}</b></div>`).join('');
-    pop.style.display = matches.length ? 'block' : 'none';
-}
-
 async function switchTab(tab) {
     CURRENT_TAB = tab;
     document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
     document.getElementById('nav-' + tab).classList.add('active');
-    document.getElementById('displayList').innerHTML = "";
-    if(tab === 'rankings') { document.getElementById('kitBar').style.display="flex"; render(CURRENT_KIT); }
-    else {
-        document.getElementById('kitBar').style.display="none"; 
-        document.getElementById('viewLabel').innerText = tab.toUpperCase();
+    
+    const out = document.getElementById('displayList');
+    const label = document.getElementById('viewLabel');
+    out.innerHTML = "";
+    
+    if(tab === 'rankings') {
+        document.getElementById('kitBar').style.display="flex";
+        render(CURRENT_KIT);
+    } else {
+        document.getElementById('kitBar').style.display="none";
+        label.innerText = tab === 'hof' ? "HALL OF FAME" : "TIER TESTERS";
+        out.innerHTML = `<div style="color:#555; font-family:'MultiCraftFont'; margin-top:50px;">LOADING ${label.innerText}...</div>`;
+        
+        // Simulating load for HOF/Testers
+        setTimeout(() => {
+            out.innerHTML = `<div style="color:var(--gold); font-family:'MultiCraftFont';">NO DATA FOUND FOR ${label.innerText}</div>`;
+        }, 500);
     }
 }
+
 load();
 </script>
 </body>
