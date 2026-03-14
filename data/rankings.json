@@ -7,7 +7,8 @@
     { "name": "chi-na", "region": "AS", "device": "MB" },
     { "name": "xenoXD", "region": "EU", "device": "MB" },
     { "name": "TQMEN", "region": "NA", "device": "MB" },
-    { "name": "Sebas11", "region": "SA", "device": "MB" }
+    { "name": "Sebas11", "region": "SA", "device": "MB" },
+    { "name": "x9jm", "region": "NA", "device": "MB" }
   ],
   "Emerald": {
     "HT1": ["TQMEN", "sample"],
@@ -16,7 +17,7 @@
   },
   "Dragonhide KB": {
     "HT1": ["ChillPotato"],
-    "LT1": ["Sample"],
+    "LT1": ["sample"],
     "HT2": ["TQMEN"],
     "LT2": ["xenoXD", "Oden_Sama"],
     "HT3": ["Sebas11"],
