@@ -130,7 +130,8 @@ nav { display: flex; justify-content: center; align-items: center; padding: 10px
 let DATA = {};
 let CURRENT_TAB = 'rankings';
 let CURRENT_KIT = 'Overall';
-// BASE URL pointing to the raw content of your data folder
+
+// FIXED URL for your specific repository fork
 const REPO_BASE = "https://raw.githubusercontent.com/mtctiersmobile/mtctiersmobile/main/data/";
 
 const KIT_MAP = { 
@@ -148,6 +149,7 @@ const REG_MAP = { "NA": "North America", "EU": "Europe", "SA": "South America", 
 const DEV_MAP = { "MK": "Mouse & Keyboard", "MB": "Mobile", "CT": "Controller", "TP": "Touchpad" };
 
 function getTags(name) {
+    if(name === "Nobody") return "";
     const p = DATA.Players?.find(x => x.name === name) || {region:"?", device:"?"};
     const rL = REG_MAP[p.region];
     const dL = DEV_MAP[p.device];
@@ -163,7 +165,18 @@ async function load() {
         DATA = await r.json();
         let totals = {};
         const PTS = { "HT1":50, "LT1":40, "HT2":30, "LT2":20, "HT3":12, "LT3":8, "HT4":5, "LT4":3, "HT5":2, "LT5":1 };
-        for(let k in DATA) if(k!=="Overall" && k!=="Players") for(let t in DATA[k]) DATA[k][t].forEach(p => totals[p] = (totals[p]||0) + (PTS[t.replace('R','')]||0));
+        
+        for(let k in DATA) {
+            if(k!=="Overall" && k!=="Players") {
+                for(let t in DATA[k]) {
+                    DATA[k][t].forEach(p => {
+                        if(p !== "Nobody") {
+                            totals[p] = (totals[p]||0) + (PTS[t.replace('R','')]||0);
+                        }
+                    });
+                }
+            }
+        }
         DATA["Overall"] = totals;
         buildKitBar();
         render("Overall");
@@ -185,10 +198,7 @@ function render(kit) {
     if(CURRENT_TAB !== 'rankings') return;
     document.getElementById('viewLabel').innerText = kit.toUpperCase();
     const out = document.getElementById('displayList'); out.innerHTML = "";
-    if(kit !== "Overall" && (!DATA[kit] || Object.keys(DATA[kit]).length === 0)) {
-        out.innerHTML = `<h2 style="font-family:'MultiCraftFont'; color:#444; margin-top:50px;">NO RANKED PLAYERS</h2>`;
-        return;
-    }
+    
     if(kit === "Overall") {
         Object.entries(DATA.Overall).sort((a,b)=>b[1]-a[1]).forEach(([name, pts], i) => {
             out.innerHTML += `<div class="tier-card clickable" onclick="openProfile('${name}')"><div style="display:flex; justify-content:space-between; align-items:center;"><div><b style="color:var(--purple); margin-right:15px; font-size:1rem;">#${i+1}</b><span style="font-weight:bold; font-size:1rem;">${name}</span>${getTags(name)}</div><b style="color:var(--gold); font-size:1rem;">${pts} PTS</b></div></div>`;
@@ -197,13 +207,19 @@ function render(kit) {
         const grid = document.createElement('div'); grid.style.display="flex"; grid.style.gap="20px"; grid.style.flexWrap="wrap"; grid.style.justifyContent="center";
         ["T1","T2","T3","T4","T5"].forEach(lvl => {
             let col = `<div style="min-width:200px;"><div style="color:var(--purple); border-bottom:1px solid var(--border); margin-bottom:10px; text-align:center; font-family:'MultiCraftFont'; font-size:0.9rem;">${lvl}</div>`;
-            let has = false;
-            for(let t in DATA[kit]) if(t.includes(lvl)) DATA[kit][t].forEach(name => {
-                has = true; const isR = t.startsWith('R');
-                const displayLabel = isR ? 'Retired ' + t.substring(1) : t;
-                col += `<div class="tier-card clickable" style="width:200px; padding:12px;" onclick="openProfile('${name}')"><span style="font-size:0.9rem; font-weight:bold;">${name}</span>${getTags(name)}<div style="font-size:0.6rem; color:${isR?'var(--grey)':'var(--gold)'}; margin-top:5px; font-weight:bold;">${displayLabel}</div></div>`;
-            });
-            if(has) { col += `</div>`; grid.innerHTML += col; }
+            let hasValid = false;
+            for(let t in DATA[kit]) {
+                if(t.includes(lvl)) {
+                    DATA[kit][t].forEach(name => {
+                        const isNobody = name === "Nobody";
+                        const isR = t.startsWith('R');
+                        const displayLabel = isR ? 'Retired ' + t.substring(1) : t;
+                        col += `<div class="tier-card ${isNobody?'':'clickable'}" style="width:200px; padding:12px; ${isNobody?'opacity:0.4':''}" ${isNobody?'':`onclick="openProfile('${name}')"`}><span style="font-size:0.9rem; font-weight:bold;">${name}</span>${getTags(name)}${isNobody?'':`<div style="font-size:0.6rem; color:${isR?'var(--grey)':'var(--gold)'}; margin-top:5px; font-weight:bold;">${displayLabel}</div>`}</div>`;
+                        if(!isNobody) hasValid = true;
+                    });
+                }
+            }
+            grid.innerHTML += col + `</div>`;
         });
         out.appendChild(grid);
     }
@@ -236,7 +252,7 @@ async function switchTab(tab) {
 }
 
 function openProfile(name) {
-    if(!DATA.Overall?.[name]) return;
+    if(!DATA.Overall?.[name] || name === "Nobody") return;
     const sorted = Object.entries(DATA.Overall).sort((a,b)=>b[1]-a[1]);
     const rankIdx = sorted.findIndex(x => x[0] === name);
     document.getElementById('pRank').innerText = "RANK #" + (rankIdx + 1);
