@@ -10,8 +10,8 @@
     { "name": "Sebas11", "region": "SA", "device": "MK" }
   ],
   "Emerald": {
-    "HT1": ["TQMEN"],
-    "LT1": ["Nobody"],
+    "HT1": ["TQMEN", "Sample"],
+    "LT1": ["ChillPotato"],
     "HT2": ["Nobody"],
     "LT2": ["Nobody"],
     "HT3": ["Nobody"],
@@ -23,7 +23,7 @@
   },
   "Dragonhide KB": {
     "HT1": ["ChillPotato"],
-    "LT1": ["Nobody"],
+    "LT1": ["Sample"],
     "HT2": ["TQMEN"],
     "LT2": ["xenoXD", "Oden_Sama"],
     "HT3": ["Sebas11"],
