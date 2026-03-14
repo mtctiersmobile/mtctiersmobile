@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MTC TIERS</title>
+<title>MTC TIERS (mobile edition)</title>
 <link rel="icon" type="image/png" href="assets/backgroundsword.png">
-<meta property="og:title" content="MTC TIERS (mobile)">
+<meta property="og:title" content="MTC TIERS (mobile edition)">
 <meta property="og:description" content="Rankings and Tiertesting for MultiCraft.">
 <meta property="og:url" content="https://mtctiersmobile.github.io/mtctiersmobile/">
 <meta property="og:image" content="https://github.com/mtctiersmobile/mtctiersmobile/blob/main/assets/backgroundsword.png">
@@ -25,7 +25,7 @@ body { background: var(--bg); color: #fff; font-family: 'Courier New', monospace
 
 header { display: flex; flex-direction: column; align-items: center; width: 100%; padding-top: 150px; position: relative; z-index: 10; }
 .title-sword { width: 45px; margin-bottom: 10px; animation: swordGlow 2s infinite ease-in-out; filter: drop-shadow(0 0 5px var(--purple)); }
-.main-title { font-family: 'MultiCraftFont'; font-size: 2.8rem; color: #fff; text-shadow: 0 0 10px var(--purple); margin: 0; }
+.main-title { font-family: 'MultiCraftFont'; font-size: 2.4rem; color: #fff; text-shadow: 0 0 10px var(--purple); margin: 0; text-align: center; }
 @keyframes swordGlow { 0%, 100% { filter: drop-shadow(0 0 5px var(--purple)); } 50% { filter: drop-shadow(0 0 20px var(--purple-glow)); } }
 
 nav { display: flex; justify-content: center; align-items: center; padding: 10px 40px; background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--border); width: 100%; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); margin-top: 65px; box-sizing: border-box; }
@@ -80,7 +80,10 @@ nav { display: flex; justify-content: center; align-items: center; padding: 10px
 </head>
 <body>
 <div class="sweep-bg"></div>
-<header><img src="assets/backgroundsword.png" class="title-sword" alt="Logo"><h1 class="main-title">MTC TIERS</h1></header>
+<header>
+    <img src="assets/backgroundsword.png" class="title-sword" alt="Logo">
+    <h1 class="main-title">MTC TIERS<br><span style="font-size: 1.2rem; opacity: 0.8;">(mobile edition)</span></h1>
+</header>
 
 <nav>
     <div class="nav-center">
@@ -131,7 +134,6 @@ let DATA = {};
 let CURRENT_TAB = 'rankings';
 let CURRENT_KIT = 'Overall';
 
-// FIXED URL for your specific repository fork
 const REPO_BASE = "https://raw.githubusercontent.com/mtctiersmobile/mtctiersmobile/main/data/";
 
 const KIT_MAP = { 
@@ -207,7 +209,6 @@ function render(kit) {
         const grid = document.createElement('div'); grid.style.display="flex"; grid.style.gap="20px"; grid.style.flexWrap="wrap"; grid.style.justifyContent="center";
         ["T1","T2","T3","T4","T5"].forEach(lvl => {
             let col = `<div style="min-width:200px;"><div style="color:var(--purple); border-bottom:1px solid var(--border); margin-bottom:10px; text-align:center; font-family:'MultiCraftFont'; font-size:0.9rem;">${lvl}</div>`;
-            let hasValid = false;
             for(let t in DATA[kit]) {
                 if(t.includes(lvl)) {
                     DATA[kit][t].forEach(name => {
@@ -215,7 +216,6 @@ function render(kit) {
                         const isR = t.startsWith('R');
                         const displayLabel = isR ? 'Retired ' + t.substring(1) : t;
                         col += `<div class="tier-card ${isNobody?'':'clickable'}" style="width:200px; padding:12px; ${isNobody?'opacity:0.4':''}" ${isNobody?'':`onclick="openProfile('${name}')"`}><span style="font-size:0.9rem; font-weight:bold;">${name}</span>${getTags(name)}${isNobody?'':`<div style="font-size:0.6rem; color:${isR?'var(--grey)':'var(--gold)'}; margin-top:5px; font-weight:bold;">${displayLabel}</div>`}</div>`;
-                        if(!isNobody) hasValid = true;
                     });
                 }
             }
@@ -265,26 +265,4 @@ function openProfile(name) {
         const color = isR ? 'var(--grey)' : 'var(--gold)';
         const display = isR ? 'Retired ' + t.substring(1) : t;
         grid += `<div class="p-kit-item">
-            <div class="kit-popup" style="border-color:${color}"><span style="color:${color}">${display}</span><br><span style="color:#666">${k}</span></div>
-            <div class="p-kit-circle" style="border-color:${color}">${KIT_MAP[k]?`<img src="${KIT_MAP[k]}">`:''}</div>
-            <div style="font-size:0.6rem; color:${color}; font-weight:bold; margin-top:5px;">${display}</div>
-        </div>`;
-    }
-    document.getElementById('pTiers').innerHTML = grid;
-    document.getElementById('profileModal').style.display = 'flex';
-}
-
-function handleSearch(val) {
-    const pop = document.getElementById('searchPopup');
-    if(!val) { pop.style.display = 'none'; return; }
-    const matches = Object.keys(DATA.Overall || {}).filter(n => n.toLowerCase().includes(val.toLowerCase())).slice(0, 5);
-    pop.innerHTML = matches.map(m => `<div class="search-item" onclick="openProfile('${m}'); document.getElementById('searchPopup').style.display='none';"><b>${m}</b> <span style="color:var(--purple); font-size:0.5rem;">VIEW PROFILE</span></div>`).join('') || "";
-    pop.style.display = matches.length ? 'block' : 'none';
-}
-
-function openInfo() { document.getElementById('infoModal').style.display = 'flex'; }
-load();
-document.addEventListener('click', (e) => { if(!e.target.closest('.search-wrap')) document.getElementById('searchPopup').style.display = 'none'; });
-</script>
-</body>
-</html>
+            <div class="kit-popup" style="border-color:${
