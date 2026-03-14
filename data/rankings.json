@@ -3,41 +3,38 @@
     { "name": "ChillPotato", "region": "SA", "device": "MB" },
     { "name": "Sample", "region": "NA", "device": "MB" },
     { "name": "Oden_Sama", "region": "AS", "device": "MK" },
-    { "name": "Jetbunz99", "region": "Unknown", "device": "MB" }
-    { "name": "chi-na", "region": "Unknown", "device": "MB" },
-    { "name": "xenoXD", "region": "Unknown", "device": "MB" }
-    { "name": "TQMEN", "region": "Unknown", "device": "MB" },
-
+    { "name": "Jetbunz99", "region": "NA", "device": "MB" },
+    { "name": "chi-na", "region": "AS", "device": "MB" },
+    { "name": "xenoXD", "region": "EU", "device": "MB" },
+    { "name": "TQMEN", "region": "NA", "device": "MB" }
   ],
   "Emerald": {
-    "HT1": ["TQMEN"]
-    "LT1": 
-    "HT2": 
-    "LT2": 
-    "HT3": 
-    "LT3": 
-    "HT4": 
-    "LT4": 
-    "HT5": 
-    "LT5": 
+    "HT1": ["TQMEN"],
+    "LT1": [],
+    "HT2": [],
+    "LT2": [],
+    "HT3": [],
+    "LT3": [],
+    "HT4": [],
+    "LT4": [],
+    "HT5": [],
+    "LT5": []
   },
   "Dragonhide KB": {
     "HT1": ["ChillPotato"],
-    "LT1": 
+    "LT1": [],
     "HT2": ["TQMEN"],
-
     "LT2": ["xenoXD", "Oden_Sama"],
     "HT3": ["Sebas11"],
-    "LT3": 
-    "HT4": ["chi-na"]
-    "LT4": 
-    "HT5": 
-    "LT5": 
-    
+    "LT3": [],
+    "HT4": ["chi-na"],
+    "LT4": [],
+    "HT5": [],
+    "LT5": []
   },
-  "Emerald OA": [],
-  "Dragonhide KB OA": [],
-  "Wand": [],
-  "Emerald KB": [],
-  "Diamond": []
+  "Emerald OA": {},
+  "Dragonhide KB OA": {},
+  "Wand": {},
+  "Emerald KB": {},
+  "Diamond": {}
 }
