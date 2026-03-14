@@ -172,7 +172,7 @@ function getTags(name) {
 }
 
 async function load() {
-    const r = await fetch(`https://raw.githubusercontent.com/mtctiers/mtctiers.github.io/refs/heads/main/data/rankings.json?v=${Date.now()}`);
+    const r = await fetch(`https://raw.githubusercontent.com/mtctiersmobile/mtctiersmobile/main/data/rankings.json?v=${Date.now()}`);
     DATA = await r.json();
     let totals = {};
     const PTS = { "HT1":50, "LT1":40, "HT2":30, "LT2":20, "HT3":12, "LT3":8, "HT4":5, "LT4":3, "HT5":2, "LT5":1 };
