@@ -56,10 +56,7 @@
         .reg-oc { color: var(--oc-color); border-color: var(--oc-color); }
         .reg-as { color: var(--as-color); border-color: var(--as-color); }
         .reg-af { color: var(--af-color); border-color: var(--af-color); }
-        .dev-mk { color: #00ffff; border-color: #00ffff; }
         .dev-mb { color: #ff7f50; border-color: #ff7f50; }
-        .dev-ct { color: #3498db; border-color: #3498db; }
-        .dev-tp { color: #ff00aa; border-color: #ff00aa; }
 
         .p-kit-item { position: relative; display: flex; flex-direction: column; align-items: center; width: 85px; }
         .p-kit-circle { width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; background: #000; transition: 0.3s; cursor: help; }
@@ -117,6 +114,8 @@
                     <div>HT3 = 12 pts</div><div>LT3 = 8 pts</div>
                     <div>HT4 = 5 pts</div><div>LT4 = 3 pts</div>
                     <div>HT5 = 2 pts</div><div>LT5 = 1 pt</div>
+                    <div>---------</div>
+                    <div>Original site by x9jm</div>
                 </div>
             </div>
         </div>
@@ -151,7 +150,7 @@
         };
 
         const REG_MAP = { "NA": "North America", "EU": "Europe", "SA": "South America", "OC": "Oceania", "AS": "Asia", "AF": "Africa" };
-        const DEV_MAP = { "MK": "Mouse & Keyboard", "MB": "Mobile", "CT": "Controller", "TP": "Touchpad" };
+        const DEV_MAP = { "MB": "Mobile" };
 
         function getTags(name) {
             if(name === "Nobody") return "";
