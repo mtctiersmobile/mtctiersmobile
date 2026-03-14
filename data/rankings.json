@@ -7,7 +7,7 @@
     { "name": "chi-na", "region": "AS", "device": "MB" },
     { "name": "xenoXD", "region": "EU", "device": "MB" },
     { "name": "TQMEN", "region": "NA", "device": "MB" },
-    { "name": "Sebas11", "region": "SA", "device": "MK" }
+    { "name": "Sebas11", "region": "SA", "device": "MB" }
   ],
   "Emerald": {
     "HT1": ["TQMEN", "Sample"],
