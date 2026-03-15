@@ -8,7 +8,8 @@
     { "name": "xenoXD", "region": "EU", "device": "MB" },
     { "name": "TQMEN", "region": "NA", "device": "MB" },
     { "name": "Sebas11", "region": "SA", "device": "MB" },
-    { "name": "x9jm", "region": "NA", "device": "MB" }
+    { "name": "x9jm", "region": "NA", "device": "MB" },
+    { "name": "XZM", "region": "AS", "device": "MB" }
   ],
   "Emerald": {
     "HT1": ["TQMEN", "sample"],
@@ -19,7 +20,7 @@
     "HT1": ["ChillPotato"],
     "LT1": ["sample"],
     "HT2": ["TQMEN"],
-    "LT2": ["xenoXD", "Oden_Sama"],
+    "LT2": ["xenoXD", "Oden_Sama", "XZM"],
     "HT3": ["Sebas11"],
     "HT4": ["chi-na"],
     "RHT5": ["x9jm"]
