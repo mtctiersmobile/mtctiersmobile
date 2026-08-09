@@ -2,28 +2,13 @@
   "Players": [
     { "name": "ChillPotato", "region": "SA", "device": "MB" },
     { "name": "sample", "region": "NA", "device": "MB" },
-    { "name": "Oden_Sama", "region": "AS", "device": "MB" },
-    { "name": "Jetbunz99", "region": "NA", "device": "MB" },
-    { "name": "chi-na", "region": "AS", "device": "MB" },
-    { "name": "xenoXD", "region": "EU", "device": "MB" },
-    { "name": "TQMEN", "region": "NA", "device": "MB" },
-    { "name": "Sebas11", "region": "SA", "device": "MB" },
-    { "name": "x9jm", "region": "NA", "device": "MB" },
-    { "name": "XZM", "region": "AS", "device": "MB" }
+    { "name": "Oden_Sama", "region": "AS", "device": "MB" }
   ],
   "Emerald": {
-    "HT1": ["TQMEN", "sample"],
-    "LT1": ["ChillPotato"],
-    "RLT5": ["x9jm"]
   },
   "Dragonhide KB": {
-    "HT1": ["ChillPotato"],
-    "LT1": ["sample"],
-    "HT2": ["TQMEN"],
-    "LT2": ["xenoXD", "Oden_Sama", "XZM"],
-    "HT3": ["Sebas11"],
-    "HT4": ["chi-na"],
-    "RHT5": ["x9jm"]
+    "HT1": ["ChillPotato", "sample"],
+    "LT1: ["Oden_Sama"]
   },
   "Emerald OA": {
 
