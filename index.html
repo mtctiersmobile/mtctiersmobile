@@ -168,7 +168,7 @@
                 const r = await fetch(`${REPO_BASE}rankings.json?v=${Date.now()}`);
                 DATA = await r.json();
                 let totals = {};
-                const PTS = { "HHT1":70, "MHT1":60, "LHT1": 50, "LT1":40, "HT2":30, "LT2":20, "HT3":12, "LT3":8, "HT4":5, "LT4":3, "HT5":2, "LT5":1 };
+                const PTS = { "HT1": 50, "LT1":40, "HT2":30, "LT2":20, "HT3":12, "LT3":8, "HT4":5, "LT4":3, "HT5":2, "LT5":1 };
                 
                 for(let k in DATA) {
                     if(k!=="Overall" && k!=="Players") {
